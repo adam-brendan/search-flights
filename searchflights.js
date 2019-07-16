@@ -14,10 +14,6 @@ const searchFlights = () => {
 	request(endpoint, function(error, response, body) {
 		const flightData = JSON.parse(body)
 		console.log("FLIGHT DATA", flightData)
-		let flightNumber;
-		let departTime;
-		let arriveTime;
-		let price;
 		let currency = flightData.currency;
 		let datesArray = flightData.trips[0].dates;
 		const dateObj = () => {
@@ -29,41 +25,78 @@ const searchFlights = () => {
 			})
 			return dateObj;
 		}
-		console.log("DATE", dateObj())
+		let flightsArray = dateObj().flights;
+
+		const printFlights = () => {
+			flightsArray.forEach(function(flight) {
+				let time;
+				let depart;
+				let departureDate = [];
+				let departureTime = [];
+				let arrive;
+				let arrivalDate = [];
+				let arrivalTime = [];
+				let price;
+				let flightNumber = flight.flightNumber;
+
+				// Departure date
+				let departureDateArray = flight.time[0].split("").splice(0, 10)
+				if (departureDateArray[5] === "0" && departureDateArray[8] === "0") {
+					departureDate.push(departureDateArray[6], "/", departureDateArray[9], "/", departureDateArray[0], departureDateArray[1], departureDateArray[2], departureDateArray[3])
+				} else if (departureDateArray[5] === "0") {
+					departureDate.push(departureDateArray[6], "/", departureDateArray[8], departureDateArray[9], "/", departureDateArray[0], departureDateArray[1], departureDateArray[2], departureDateArray[3])
+				} else if (departureDateArray[8] === "0") {
+					departureDate.push(departureDateArray[5], departureDateArray[6], "/", departureDateArray[9], "/", departureDateArray[0], departureDateArray[1], departureDateArray[2], departureDateArray[3])
+				} else {
+					departureDate.push(departureDateArray[5], departureDateArray[6], "/", departureDateArray[8], departureDateArray[9], "/", departureDateArray[0], departureDateArray[1], departureDateArray[2], departureDateArray[3])
+				}
+
+				// Departure time
+				let departureTimeArray = flight.time[0].split("").slice(11, 19)
+				if (departureTimeArray[0] === "0") {
+					departureTime.push(departureTimeArray[1], departureTimeArray[2], departureTimeArray[3], departureTimeArray[4], departureTimeArray[5], departureTimeArray[6], departureTimeArray[7])
+				} else {
+					departureTime.push(departureTimeArray[0], departureTimeArray[1], departureTimeArray[2], departureTimeArray[3], departureTimeArray[4], departureTimeArray[5], departureTimeArray[6], departureTimeArray[7])
+				}
+				depart = departureDate.join("") + " " + departureTime.join("")
+				console.log("DEPART FINAL", depart)
+
+				// Arrival date
+				let arrivalDateArray = flight.time[1].split("").slice(0, 10)
+				if (arrivalDateArray[5] === "0" && arrivalDateArray[8] === "0") {
+					arrivalDate.push(arrivalDateArray[6], "/", arrivalDateArray[9], "/", arrivalDateArray[0], arrivalDateArray[1], arrivalDateArray[2], arrivalDateArray[3])
+				} else if (arrivalDateArray[5] === "0") {
+					arrivalDate.push(arrivalDateArray[6], "/", arrivalDateArray[8], arrivalDateArray[9], "/", arrivalDateArray[0], arrivalDateArray[1], arrivalDateArray[2], arrivalDateArray[3])
+				} else if (arrivalDateArray[8] === "0") {
+					arrivalDate.push(arrivalDateArray[5], arrivalDateArray[6], "/", arrivalDateArray[9], "/", arrivalDateArray[0], arrivalDateArray[1], arrivalDateArray[2], arrivalDateArray[3])
+				} else {
+					arrivalDate.push(arrivalDateArray[5], arrivalDateArray[6], "/", arrivalDateArray[8], arrivalDateArray[9], "/", arrivalDateArray[0], arrivalDateArray[1], arrivalDateArray[2], arrivalDateArray[3])
+				}
+
+				// Arrival time
+				let arrivalTimeArray = flight.time[1].split("").slice(11, 19)
+				if (arrivalTimeArray[0] === "0") {
+					arrivalTime.push(arrivalTimeArray[1], arrivalTimeArray[2], arrivalTimeArray[3], arrivalTimeArray[4], arrivalTimeArray[5], arrivalTimeArray[6], arrivalTimeArray[7])
+				} else {
+					arrivalTime.push(arrivalTimeArray[0], arrivalTimeArray[1], arrivalTimeArray[2], arrivalTimeArray[3], arrivalTimeArray[4], arrivalTimeArray[5], arrivalTimeArray[6], arrivalTimeArray[7])
+				}
+
+				arrive = arrivalDate.join("") + " " + arrivalTime.join("")
+				console.log("ARRIVE FINAL", arrive)
+				
+				
+				price = flight.regularFare;
+				// console.log("FLIGHT NUMBER", flightNumber)
+				// console.log("DEPART", departureDate)
+				// console.log("ARRIVE", arrivalDate)
+				// console.log("PRICE", price)
+				// console.log("DEPART TIME", depart)
+			})
+		}
+		console.log(printFlights())
 
 
 	})
 }
 
 searchFlights();
-
-
-
-
-
-
-// const searchFlights = (data) => {
-// 	const currency = data.currency;
-// 	const trips = data.trips
-// 	const dates = trips[0].dates
-// 	const requestedDates = []
-// 	dates.forEach(function(date) {
-// 		requestedDates.push(date.dateOut)
-// 	})
-// 	console.log("CURRENCY", currency);
-// 	console.log("TRIPS", trips)
-// 	console.log("DATES", dates)
-// 	console.log("REQUESTED DATES", requestedDates)
-// }
-
-// searchFlights(data.valid);
-
-// Flight Number 
-// Origin 
-// Destination 
-// Departure Time 
-// Arrival Time 
-// Price 
-// Currency 
-
-// FR 8859 DUB --> LIS (6/30/2019 9:30:00 --> 6/30/2019 17:05:00) - 11535.32 HUF 
