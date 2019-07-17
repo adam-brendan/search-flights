@@ -2,7 +2,7 @@
   "name": "search-flights",
   "version": "1.0.0",
   "description": "",
-  "main": "helperfunctions.js",
+  "main": "searchflights.js",
   "dependencies": {
     "request": "^2.88.0"
   },

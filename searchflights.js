@@ -67,9 +67,6 @@ const searchFlights = () => {
 								
 							}
 							printFlights();
-							// printFlights().forEach(function(flight) {
-							// 	return console.log(flight);
-							// })
 						}
 					})
 					rl.close();
@@ -77,27 +74,5 @@ const searchFlights = () => {
 			});
 		});
 	});
-
-	
-
-	
-
-	
-		
-
-	// if (process.argv.length !== 6) {
-	// 	return console.log("Please ensure you have the right number of inputs")
-	// }
-
-	// Store input variables
-	// const adt = process.argv[2];
-	// const departureDate = process.argv[3];
-	// const origin = process.argv[4];
-	// const destination = process.argv[5];
-	// const endpoint = `https://desktopapps.ryanair.com/v4/en-gb/availability?ADT=${adt}&CHD=0&DateOut=${departureDate}&Destination=${destination}&FlexDaysOut=2&INF=0&IncludeConnectingFlights=true&Origin=${origin}&RoundTrip=false&TEEN=0&ToUs=AGREED&exists=false`
-
-
-		
 }
-
 searchFlights();
