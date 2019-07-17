@@ -1,0 +1,26 @@
+{
+  "name": "search-flights",
+  "version": "1.0.0",
+  "description": "",
+  "main": "helperfunctions.js",
+  "dependencies": {
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adam-brendan/search-flights.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adam-brendan/search-flights/issues"
+  },
+  "homepage": "https://github.com/adam-brendan/search-flights#readme"
+}

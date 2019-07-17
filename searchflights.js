@@ -16,13 +16,13 @@ const searchFlights = () => {
 	let endpoint;
 
 	rl.question("Please input number of adults: ", (answer) => {
-		adt = answer;
+		answer === "exit" ? process.exit() : adt = answer;
 		rl.question("Please input departure date: ", (answer) => {
-			departureDate = answer;
+			answer === "exit" ? process.exit() : departureDate = answer;
 			rl.question("Please input origin airport: ", (answer) => {
-				origin = answer;
+				answer === "exit" ? process.exit() : origin = answer;
 				rl.question("Please input destination airport: ", (answer) => {
-					destination = answer;
+					answer === "exit" ? process.exit() : destination = answer;
 					endpoint = `https://desktopapps.ryanair.com/v4/en-gb/availability?ADT=${adt}&CHD=0&DateOut=${departureDate}&Destination=${destination}&FlexDaysOut=2&INF=0&IncludeConnectingFlights=true&Origin=${origin}&RoundTrip=false&TEEN=0&ToUs=AGREED&exists=false`
 					request(endpoint, function(error, response, body) {
 						const flightData = JSON.parse(body)
